@@ -19,6 +19,7 @@ defmodule Multilingual.MixProject do
 
   defp deps do
     [
+      {:phoenix, ">= 1.7.10"}
     ]
   end
 end
