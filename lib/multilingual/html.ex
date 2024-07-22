@@ -6,6 +6,18 @@ if Code.ensure_loaded?(Phoenix.Component) do
 
     @doc """
     Builds a list of data for rel links for the document head.
+
+    ## Example
+
+    In the router:
+      scope "/", MyAppWeb do
+        get "/about", PageController, :index, metadata("en")
+        get "/it/chi-siamo", PageController, :index, metadata("it")
+      end
+
+      iex> get_rel_links(conn) |> IO.puts()
+      <link rel="canonical" href="https://example.com/about">
+      <link rel="alternate" hreflang="it" href="https://example.com/it/chi-siamo">
     """
     def get_rel_links(%Plug.Conn{} = conn) do
       router = Phoenix.Controller.router_module(conn)
