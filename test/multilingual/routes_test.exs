@@ -5,6 +5,21 @@ defmodule Multilingual.RoutesTest do
   import Multilingual.Routes
   alias Multilingual.Test.Project.Router
 
+  describe "build_page_mapping/2" do
+    test "returns a mapping of locales to paths for the current page" do
+      assert build_page_mapping(Router, "/about") ==
+               {:ok, %{"en" => "/about", "it" => "/it/chi-siamo"}}
+    end
+
+    test "returns an error tuple when the path doesn't exist" do
+      assert build_page_mapping(Router, "/doesnt_exist") == {:error, :not_found}
+    end
+
+    test "returns an error tuple when the path is not localized" do
+      assert build_page_mapping(Router, "/monolingual") == {:error, :not_localized}
+    end
+  end
+
   describe "localized_path/3" do
     test "returns the localized path" do
       assert localized_path(Router, "/about", "it") == "/it/chi-siamo"
