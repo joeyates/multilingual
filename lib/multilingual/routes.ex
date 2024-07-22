@@ -37,6 +37,22 @@ defmodule Multilingual.Routes do
     )
   end
 
+  @doc """
+  Returns the equivalent localized path for the given path and locale.
+
+  If the path is not found, it returns `nil`.
+
+  ## Examples
+
+    In the router:
+      scope "/", MyAppWeb do
+        get "/about", PageController, :index, metadata("en")
+        get "/it/chi-siamo", PageController, :index, metadata("it")
+      end
+
+    iex> Multilingual.Routes.localized_path(MyAppWeb.Router, "/about", "it")
+    "/it/chi-siamo"
+  """
   def localized_path(router, path, locale) do
     case localized_route(router, path, locale) do
       nil ->
