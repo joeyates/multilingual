@@ -23,6 +23,8 @@ defmodule Multilingual.MixProject do
 
   defp deps do
     [
+      {:ex_cldr, ">= 2.39.2"},
+      {:jason, ">= 1.4.1"},
       {:phoenix, ">= 1.7.10"}
     ]
   end
