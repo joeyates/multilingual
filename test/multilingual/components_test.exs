@@ -11,11 +11,13 @@ defmodule Multilingual.ComponentsTest do
         rel_links(%{rels: rels})
         |> Phoenix.HTML.Safe.to_iodata()
         |> to_string()
+
       expected =
         ~s"""
         \n  \n    <link rel="canonical" href="/about">\n  
         \n  \n    <link rel="alternate" hreflang="it" href="/it/chi-siamo">\n  
         """
+
       assert result == expected
     end
   end

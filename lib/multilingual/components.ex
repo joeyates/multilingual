@@ -5,7 +5,7 @@ if Code.ensure_loaded?(Phoenix.Component) do
     @doc """
     Create a list of rel links for the current page.
     """
-    attr :rels, :list
+    attr(:rels, :list)
 
     def rel_links(assigns) do
       ~H"""

@@ -65,6 +65,7 @@ defmodule Multilingual.RedirectIncomingTest do
 
     test "raises an error when the :accept_locale_source is not known" do
       opts = [accept_locale_source: SomeModule, nearest_known: fn _ -> nil end]
+
       assert_raise ArgumentError, ~r/unsupported accept_locale_source/, fn ->
         init(opts)
       end
