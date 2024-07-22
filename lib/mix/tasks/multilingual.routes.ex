@@ -46,7 +46,7 @@ defmodule Mix.Tasks.Multilingual.Routes do
         locale_columns =
           Enum.map(locales, fn locale ->
             view = routes[locale]
-            view.path || ""
+            if view, do: view.path, else: "-"
           end)
         common_columns ++ locale_columns
       end)
