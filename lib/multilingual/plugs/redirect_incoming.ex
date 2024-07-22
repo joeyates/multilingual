@@ -1,4 +1,34 @@
 defmodule Multilingual.RedirectIncoming do
+  @moduledoc """
+  Redirects incoming requests to the user's preferred language.
+
+  Use this plug in your router pipeline to redirect incoming requests
+  to the user's preferred language, as indicated by the "Accept-Language"
+  header.
+
+  This plug should be preceded by another plug that actually does the
+  fetching and parsing of the "Accept-Language" header, such as
+  `Cldr.Plug.AcceptLanguage`.
+
+  Two options are required:
+
+  * `:accept_locale_source` - the module that provides the user's preferred
+    language. Currently, only `Cldr` is supported,
+  * `:nearest_known` - a function that returns the nearest known locale
+    to the user's preferred locale.
+
+  ## Example
+
+      pipeline :browser do
+        ...
+        plug Cldr.Plug.AcceptLanguage, cldr_backend: MyApp.Cldr
+        plug RedirectIncoming,
+          accept_locale_source: Cldr,
+          nearest_known: &MyApp.nearest_known/1
+        ...
+      end
+  """
+
   @attrs [:accept_locale_source, :nearest_known]
   @enforce_keys @attrs
   defstruct @attrs

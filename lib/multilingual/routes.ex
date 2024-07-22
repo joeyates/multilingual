@@ -1,6 +1,38 @@
 defmodule Multilingual.Routes do
   @doc """
-  Builds a mapping of locales to paths for the current page
+  Builds a mapping of locales to paths for the current page.
+
+  ## Examples
+
+  In the router:
+
+    scope "/", MyAppWeb do
+      get "/about", PageController, :index, metadata("en")
+      get "/it/chi-siamo", PageController, :index, metadata("it")
+    end
+
+    iex> Multilingual.Routes.build_page_mapping(MyAppWeb.Router, "/about")
+    {:ok, %{"en" => "/about", "it" => "/it/chi-siamo"}}
+
+  The result can be used to create a language switcher in the view.
+
+    <% locales = ["en", "it"] %>
+    <% locale = Multilingual.View.fetch_key(@conn, :locale) %>
+    <% path = Multilingual.View.fetch_key(@conn, :path) %>
+    <% {:ok, mapping} = Multilingual.Routes.build_page_mapping(@conn, path) %>
+    <nav>
+      <ul>
+        <%= for lcl <- locales do %>
+          <%= if lcl == locale do %>
+            <li><%= lcl %></li>
+          <% else %>
+            <%= if mapping[lcl] do %>
+              <li><a href={mapping[lcl]}><%= lcl %></a></li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    </nav>
   """
   def build_page_mapping(router, path) do
     with {:ok, current_route} <- find_path_route(router, path),
@@ -37,6 +69,22 @@ defmodule Multilingual.Routes do
     )
   end
 
+  @doc """
+  Returns the equivalent localized path for the given path and locale.
+
+  If the path is not found, it returns `nil`.
+
+  ## Examples
+
+    In the router:
+      scope "/", MyAppWeb do
+        get "/about", PageController, :index, metadata("en")
+        get "/it/chi-siamo", PageController, :index, metadata("it")
+      end
+
+    iex> Multilingual.Routes.localized_path(MyAppWeb.Router, "/about", "it")
+    "/it/chi-siamo"
+  """
   def localized_path(router, path, locale) do
     case localized_route(router, path, locale) do
       nil ->

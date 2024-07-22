@@ -1,4 +1,23 @@
 defmodule Multilingual.StoreView do
+  @moduledoc """
+  Store the view information in the connection's private data.
+
+  This plug **must** be used in the router pipeline in order
+  to enable all other Multilingual features in Phoenix views.
+
+  ## Example
+
+    defmodule MyAppWeb.Router do
+      use MyAppWeb, :router
+
+      alias Multilingual.StoreView
+
+      pipeline :browser do
+        ...
+        plug StoreView, default_locale: "en"
+      end
+    end
+  """
   import Plug.Conn
   alias Multilingual.Routes
   alias Multilingual.View
