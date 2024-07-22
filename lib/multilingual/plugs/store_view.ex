@@ -1,4 +1,4 @@
-defmodule Multilingual.Plug do
+defmodule Multilingual.StoreView do
   import Plug.Conn
   alias Multilingual.Routes
   alias Multilingual.View
