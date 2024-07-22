@@ -49,4 +49,8 @@ defmodule Multilingual.View do
   def fetch_key(%Plug.Conn{} = conn, key) when key in @attrs do
     Map.fetch!(conn.private.multilingual, key)
   end
+
+  def fetch_key(%Phoenix.LiveView.Socket{} = socket, key) when key in @attrs do
+    Map.fetch!(socket.private.multilingual, key)
+  end
 end

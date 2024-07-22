@@ -127,7 +127,7 @@ defmodule Multilingual.Routes do
     end
   end
 
-  defp locale(route) do
+  def locale(route) do
     case get_in(route, [:metadata, :multilingual, :locale]) do
       nil -> {:error, :no_locale}
       locale -> {:ok, locale}
