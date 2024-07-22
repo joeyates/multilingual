@@ -6,7 +6,8 @@ defmodule Multilingual.View do
   @doc """
   Fetches a key from the private View data in the connection or returns nil
   if the view is not found.
-  Raise an error if an erroneous key is requested.
+
+  Raises an error if an erroneous key is requested.
 
   ## Examples
 
