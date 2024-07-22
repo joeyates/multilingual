@@ -18,10 +18,10 @@ defmodule Multilingual.HTMLTest do
         |> Phoenix.HTML.Safe.to_iodata()
         |> to_string()
 
-      expected = "\n  \n    <link rel=\"canonical\" href=\"http://example.com/about\">\n  \n\n  \n    <link rel=\"alternate\" hreflang=\"it\" href=\"http://example.com/it/chi-siamo\">\n  \n"
+      expected =
+        "\n  \n    <link rel=\"canonical\" href=\"http://example.com/about\">\n  \n\n  \n    <link rel=\"alternate\" hreflang=\"it\" href=\"http://example.com/it/chi-siamo\">\n  \n"
 
       assert result == expected
     end
   end
 end
-

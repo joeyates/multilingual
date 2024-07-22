@@ -8,6 +8,7 @@ defmodule Mix.Tasks.Multilingual.Routes do
     Mix.Task.run("compile", [])
     base = Mix.Phoenix.base()
     router = Module.concat(["#{base}Web", "Router"])
+
     {localized_groups, _other} =
       router
       |> Phoenix.Router.routes()
@@ -15,14 +16,18 @@ defmodule Mix.Tasks.Multilingual.Routes do
         case Routes.locale(route) do
           {:ok, locale} ->
             view = {route.plug, route.helper, route.plug_opts}
-            localized = Map.update(localized, view, %{locale => route}, &(Map.put(&1, locale, route)))
+
+            localized =
+              Map.update(localized, view, %{locale => route}, &Map.put(&1, locale, route))
+
             {localized, other}
+
           {:error, _} ->
             {localized, [route | other]}
         end
       end)
 
-    locales = 
+    locales =
       localized_groups
       |> Enum.reduce(%{}, fn {_view, routes}, acc ->
         routes
@@ -32,6 +37,7 @@ defmodule Mix.Tasks.Multilingual.Routes do
       |> Map.keys()
 
     headings = ["method", "module", "action"] ++ locales
+
     rows =
       localized_groups
       |> Enum.map(fn {{plug, _helper, plug_opts}, routes} ->
@@ -43,15 +49,18 @@ defmodule Mix.Tasks.Multilingual.Routes do
           else
             ["get", Macro.to_string(plug), ":#{plug_opts}"]
           end
+
         locale_columns =
           Enum.map(locales, fn locale ->
             view = routes[locale]
             if view, do: view.path, else: "-"
           end)
+
         common_columns ++ locale_columns
       end)
 
     seed = Enum.map(headings, &String.length/1)
+
     column_widths =
       rows
       |> Enum.reduce(seed, fn row, acc ->
@@ -76,4 +85,3 @@ defmodule Mix.Tasks.Multilingual.Routes do
     end)
   end
 end
-

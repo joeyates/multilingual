@@ -14,6 +14,7 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
           socket = put_private(socket, :multilingual, view)
           {:cont, socket}
         end)
+
       {:cont, socket}
     end
   end

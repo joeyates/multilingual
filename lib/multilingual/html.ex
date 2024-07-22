@@ -11,10 +11,12 @@ if Code.ensure_loaded?(Phoenix.Component) do
       router = Phoenix.Controller.router_module(conn)
       path = View.fetch_key(conn, :path)
       locale = View.fetch_key(conn, :locale)
+
       case Routes.build_page_mapping(router, path) do
         {:ok, mapping} ->
           rels = build_rels(conn, locale, mapping)
           rel_links(%{rels: rels})
+
         _ ->
           ""
       end
@@ -24,6 +26,7 @@ if Code.ensure_loaded?(Phoenix.Component) do
       mapping
       |> Enum.map(fn {locale, path} ->
         url = Phoenix.VerifiedRoutes.unverified_url(conn, path)
+
         if locale == page_locale do
           {"canonical", nil, url}
         else

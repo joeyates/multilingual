@@ -8,6 +8,7 @@ defmodule Multilingual.LiveView.HookTest do
     setup do
       socket =
         %Phoenix.LiveView.Socket{router: Router}
+
       private = socket.private
       socket = %{socket | private: Map.put(private, :lifecycle, %{handle_params: []})}
       {:ok, socket: socket}
@@ -32,4 +33,3 @@ defmodule Multilingual.LiveView.HookTest do
     end
   end
 end
-
