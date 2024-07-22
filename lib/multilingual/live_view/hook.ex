@@ -3,7 +3,7 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
     @moduledoc """
     Store the view information in the LiveView socket's private data.
 
-    This hook **must** registered in for each LiveView in order
+    This hook **must** be registered for each LiveView in order
     to enable all other Multilingual features in Phoenix live views.
 
     ## Example
