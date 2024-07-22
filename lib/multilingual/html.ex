@@ -16,7 +16,7 @@ if Code.ensure_loaded?(Phoenix.Component) do
           get "/it/chi-siamo", PageController, :index, metadata("it")
         end
 
-    In a view:
+    In the `<head>` of the layout template:
 
         <%= get_rel_links(@conn) %>
 
