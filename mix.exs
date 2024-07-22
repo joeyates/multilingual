@@ -25,7 +25,8 @@ defmodule Multilingual.MixProject do
     [
       {:ex_cldr, ">= 2.39.2"},
       {:jason, ">= 1.4.1"},
-      {:phoenix, ">= 1.7.10"}
+      {:phoenix, ">= 1.7.10"},
+      {:phoenix_live_view, ">= 0.20.1", optional: true}
     ]
   end
 end
