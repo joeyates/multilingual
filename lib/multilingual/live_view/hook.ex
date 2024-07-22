@@ -8,16 +8,16 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
 
     ## Example
 
-      defmodule MyAppWeb.HomeLive do
-        use MyAppWeb, :live_view
+        defmodule MyAppWeb.HomeLive do
+          use MyAppWeb, :live_view
 
-        @impl true
-        def mount(params, session, socket) do
-          ...
+          @impl true
+          def mount(params, session, socket) do
+            ...
+          end
+
+          on_mount {Multilingual.LiveView.Hook, default_locale: "en"}
         end
-
-        on_mount {Multilingual.LiveView.Hook, default_locale: "en"}
-      end
     """
 
     import Phoenix.LiveView

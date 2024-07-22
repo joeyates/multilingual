@@ -11,7 +11,7 @@ defmodule Multilingual.Routes do
         get "/it/chi-siamo", PageController, :index, metadata("it")
       end
 
-      iex> Multilingual.Routes.build_page_mapping(MyAppWeb.Router, "/about")
+      > Multilingual.Routes.build_page_mapping(MyAppWeb.Router, "/about")
       {:ok, %{"en" => "/about", "it" => "/it/chi-siamo"}}
 
   The result can be used to create a language switcher in the view.
@@ -76,14 +76,15 @@ defmodule Multilingual.Routes do
 
   ## Examples
 
-    In the router:
+  In the router:
+
       scope "/", MyAppWeb do
         get "/about", PageController, :index, metadata("en")
         get "/it/chi-siamo", PageController, :index, metadata("it")
       end
 
-    iex> Multilingual.Routes.localized_path(MyAppWeb.Router, "/about", "it")
-    "/it/chi-siamo"
+      > Multilingual.Routes.localized_path(MyAppWeb.Router, "/about", "it")
+      "/it/chi-siamo"
   """
   def localized_path(router, path, locale) do
     case localized_route(router, path, locale) do

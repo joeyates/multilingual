@@ -7,16 +7,16 @@ defmodule Multilingual.StoreView do
 
   ## Example
 
-    defmodule MyAppWeb.Router do
-      use MyAppWeb, :router
+      defmodule MyAppWeb.Router do
+        use MyAppWeb, :router
 
-      alias Multilingual.StoreView
+        alias Multilingual.StoreView
 
-      pipeline :browser do
-        ...
-        plug StoreView, default_locale: "en"
+        pipeline :browser do
+          ...
+          plug StoreView, default_locale: "en"
+        end
       end
-    end
   """
   import Plug.Conn
   alias Multilingual.Routes

@@ -10,18 +10,18 @@ defmodule Multilingual.View do
 
   ## Examples
 
-    iex> view = %Multilingual.View{locale: "en", path: "/about"}
-    ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
-    ...> Multilingual.View.get_key(conn, :path)
-    "/about"
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
+      ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
+      ...> Multilingual.View.get_key(conn, :path)
+      "/about"
 
-    iex> Multilingual.View.get_key(%Plug.Conn{}, :path)
-    nil
+      iex> Multilingual.View.get_key(%Plug.Conn{}, :path)
+      nil
 
-    iex> view = %Multilingual.View{locale: "en", path: "/about"}
-    ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
-    ...> Multilingual.View.get_key(conn, :bad_key)
-    ** (FunctionClauseError) no function clause matching in Multilingual.View.get_key/2
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
+      ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
+      ...> Multilingual.View.get_key(conn, :bad_key)
+      ** (FunctionClauseError) no function clause matching in Multilingual.View.get_key/2
   """
   def get_key(%Plug.Conn{} = conn, key) when key in @attrs do
     case Map.get(conn.private, :multilingual) do
