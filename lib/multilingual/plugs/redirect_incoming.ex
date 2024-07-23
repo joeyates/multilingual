@@ -79,16 +79,18 @@ defmodule Multilingual.RedirectIncoming do
     end
   end
 
-  defp accept_locale(conn, %__MODULE__{accept_locale_source: Cldr}) do
-    case conn.private[:cldr_locale] do
-      nil ->
-        {:error, :no_accept_locale}
+  if Code.ensure_loaded?(Cldr) do
+    defp accept_locale(conn, %__MODULE__{accept_locale_source: Cldr}) do
+      case conn.private[:cldr_locale] do
+        nil ->
+          {:error, :no_accept_locale}
 
-      locale when is_binary(locale) ->
-        {:ok, locale}
+        locale when is_binary(locale) ->
+          {:ok, locale}
 
-      %Cldr.LanguageTag{} = locale ->
-        {:ok, to_string(locale)}
+        %Cldr.LanguageTag{} = locale ->
+          {:ok, to_string(locale)}
+      end
     end
   end
 
