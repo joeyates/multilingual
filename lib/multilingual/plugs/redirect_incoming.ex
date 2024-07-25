@@ -1,4 +1,4 @@
-defmodule Multilingual.RedirectIncoming do
+defmodule Multilingual.Plugs.RedirectIncoming do
   @moduledoc """
   Redirects incoming requests to the user's preferred language.
 

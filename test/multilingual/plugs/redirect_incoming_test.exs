@@ -1,8 +1,8 @@
-defmodule Multilingual.RedirectIncomingTest do
+defmodule Multilingual.Plugs.RedirectIncomingTest do
   use ExUnit.Case, async: true
 
-  import Multilingual.RedirectIncoming
-  alias Multilingual.RedirectIncoming
+  import Multilingual.Plugs.RedirectIncoming
+  alias Multilingual.Plugs.RedirectIncoming
   alias Multilingual.View
   alias Multilingual.Test.Project.Router
 
