@@ -1,7 +1,7 @@
-defmodule Multilingual.LiveView.HookTest do
+defmodule Multilingual.Hooks.StoreViewTest do
   use ExUnit.Case
 
-  import Multilingual.LiveView.Hook
+  import Multilingual.Hooks.StoreView
   alias Multilingual.Test.Project.Router
 
   describe "on_mount/4" do
@@ -14,17 +14,20 @@ defmodule Multilingual.LiveView.HookTest do
       {:ok, socket: socket}
     end
 
-    test "attaches the multilingual hook", %{socket: socket} do
+    test "attaches the store_view hook", %{socket: socket} do
       {_, socket} = on_mount([default_locale: "en"], nil, nil, socket)
 
-      assert [%{function: _fn, id: :multilingual}] = socket.private.lifecycle.handle_params
+      assert [%{function: _fn, id: :multilingual_store_view}] =
+               socket.private.lifecycle.handle_params
     end
 
     test "returns {:cont, socket}", %{socket: socket} do
       assert {:cont, _socket} = on_mount([default_locale: "en"], nil, nil, socket)
     end
 
-    test "attaches a hook that sets the path and locale", %{socket: socket} do
+    test "attaches a hook that stores the path and locale in the socket's private data", %{
+      socket: socket
+    } do
       {_, socket} = on_mount([default_locale: "en"], nil, "http://example.com/about", socket)
 
       hook = hd(socket.private.lifecycle.handle_params)
