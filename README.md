@@ -24,7 +24,7 @@ information directly in the router.
 
 # Route Metadata
 
-Fotunately, the [Phoenix.Router](https://hexdocs.pm/phoenix/Phoenix.Router.html)
+Fortunately, the [Phoenix.Router](https://hexdocs.pm/phoenix/Phoenix.Router.html)
 allows [metadata](https://hexdocs.pm/phoenix/Phoenix.Router.html#match/5-options)
 to be added to route declarations.
 
