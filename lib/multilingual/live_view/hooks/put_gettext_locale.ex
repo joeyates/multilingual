@@ -16,7 +16,7 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
           alias Multilingual.Hooks.PutGettextLocale
 
           on_mount {StoreView, default_locale: "en"}
-          on_mount {PutGettextLocale}
+          on_mount PutGettextLocale
         end
     """
 
