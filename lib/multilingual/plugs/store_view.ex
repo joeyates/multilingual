@@ -1,4 +1,4 @@
-defmodule Multilingual.StoreView do
+defmodule Multilingual.Plugs.StoreView do
   @moduledoc """
   Store the view information in the connection's private data.
 
@@ -10,7 +10,7 @@ defmodule Multilingual.StoreView do
       defmodule MyAppWeb.Router do
         use MyAppWeb, :router
 
-        alias Multilingual.StoreView
+        alias Multilingual.Plugs.StoreView
 
         pipeline :browser do
           ...

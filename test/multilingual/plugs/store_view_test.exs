@@ -1,7 +1,7 @@
-defmodule Multilingual.StoreViewTest do
+defmodule Multilingual.Plugs.StoreViewTest do
   use ExUnit.Case, async: true
 
-  import Multilingual.StoreView
+  import Multilingual.Plugs.StoreView
   alias Multilingual.Test.Project.Router
 
   describe "init/1" do

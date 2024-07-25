@@ -1,7 +1,7 @@
-defmodule Multilingual.PutGettextLocaleTest do
+defmodule Multilingual.Plugs.PutGettextLocaleTest do
   use ExUnit.Case, async: true
 
-  import Multilingual.PutGettextLocale
+  import Multilingual.Plugs.PutGettextLocale
 
   describe "call/2" do
     setup do
