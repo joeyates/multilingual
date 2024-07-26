@@ -31,18 +31,18 @@ defmodule Multilingual.Hooks.PutGettextLocaleTest do
     end
 
     test "attaches the put_locale hook", %{socket: socket} do
-      {_, socket} = on_mount([:put_locale], nil, nil, socket)
+      {_, socket} = on_mount([:default], nil, nil, socket)
 
       assert [%{function: _fn, id: :multilingual_put_locale}] =
                socket.private.lifecycle.handle_params
     end
 
     test "returns {:cont, socket}", %{socket: socket} do
-      {:cont, _socket} = on_mount([:put_locale], nil, nil, socket)
+      {:cont, _socket} = on_mount([:default], nil, nil, socket)
     end
 
     test "the hook puts the Gettext locale", %{socket: socket} do
-      {_, socket} = on_mount([:put_locale], nil, nil, socket)
+      {_, socket} = on_mount([:default], nil, nil, socket)
 
       hook = hd(socket.private.lifecycle.handle_params)
       {_, _socket} = hook.function.([], "http://example.com/about", socket)
@@ -54,7 +54,7 @@ defmodule Multilingual.Hooks.PutGettextLocaleTest do
     test "the hook fails if the view information is not stored in the socket's private data", %{
       socket: socket
     } do
-      {_, socket} = on_mount([:put_locale], nil, nil, socket)
+      {_, socket} = on_mount([:default], nil, nil, socket)
 
       assert_raise Multilingual.MissingViewDataInSocketError, fn ->
         hook = hd(socket.private.lifecycle.handle_params)
