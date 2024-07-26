@@ -7,7 +7,7 @@ defmodule Multilingual.Hooks.PutGettextLocaleTest do
   defp optionally_add_multilingual_view(socket, %{multilingual_view: false}), do: socket
 
   defp optionally_add_multilingual_view(socket, _context) do
-    put_private(socket, :multilingual, %Multilingual.View{route: "/my_live", locale: "fr"})
+    put_private(socket, :multilingual, %Multilingual.View{path: "/my_live", locale: "fr"})
   end
 
   describe "on_mount/4" do

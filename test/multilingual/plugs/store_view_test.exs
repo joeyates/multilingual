@@ -22,7 +22,7 @@ defmodule Multilingual.Plugs.StoreViewTest do
 
       conn = call(conn, %{default_locale: "cn"})
 
-      assert conn.private.multilingual.route == "/about"
+      assert conn.private.multilingual.path == "/about"
     end
 
     test "stores the locale as private data" do
@@ -38,7 +38,7 @@ defmodule Multilingual.Plugs.StoreViewTest do
 
       conn = call(conn, %{default_locale: "cn"})
 
-      assert conn.private.multilingual.route == "/contacts/:name"
+      assert conn.private.multilingual.path == "/contacts/:name"
     end
 
     test "when the path has parameters, stores the correct locale" do

@@ -28,7 +28,7 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
           uri = URI.parse(uri)
           info = Phoenix.Router.route_info(socket.router, "GET", uri.path, nil)
           locale = Routes.path_locale(socket.router, info.route) || default_locale
-          view = %View{route: info.route, locale: locale}
+          view = %View{path: info.route, locale: locale}
           socket = put_private(socket, :multilingual, view)
           {:cont, socket}
         end)

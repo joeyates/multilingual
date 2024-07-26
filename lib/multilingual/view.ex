@@ -1,5 +1,5 @@
 defmodule Multilingual.View do
-  @attrs [:locale, :route]
+  @attrs [:locale, :path]
   @enforce_keys @attrs
   defstruct @attrs
 
@@ -11,25 +11,25 @@ defmodule Multilingual.View do
 
   ## Examples
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
-      ...> Multilingual.View.get_key(conn, :route)
+      ...> Multilingual.View.get_key(conn, :path)
       "/about"
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
       ...> Multilingual.View.get_key(conn, :bad_key)
       ** (FunctionClauseError) no function clause matching in Multilingual.View.get_key/2
 
-      iex> Multilingual.View.get_key(%Plug.Conn{}, :route)
+      iex> Multilingual.View.get_key(%Plug.Conn{}, :path)
       nil
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> socket = Phoenix.LiveView.put_private(%Phoenix.LiveView.Socket{}, :multilingual, view)
-      ...> Multilingual.View.get_key(socket, :route)
+      ...> Multilingual.View.get_key(socket, :path)
       "/about"
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> socket = Phoenix.LiveView.put_private(%Phoenix.LiveView.Socket{}, :multilingual, view)
       ...> Multilingual.View.get_key(socket, :bad_key)
       ** (FunctionClauseError) no function clause matching in Multilingual.View.get_key/2
@@ -59,12 +59,12 @@ defmodule Multilingual.View do
 
   ## Examples
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
-      ...> Multilingual.View.fetch_key(conn, :route)
+      ...> Multilingual.View.fetch_key(conn, :path)
       "/about"
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> conn = Plug.Conn.put_private(%Plug.Conn{}, :multilingual, view)
       ...> Multilingual.View.fetch_key(conn, :bad_key)
       ** (FunctionClauseError) no function clause matching in Multilingual.View.fetch_key/2
@@ -73,12 +73,12 @@ defmodule Multilingual.View do
       ...>  Multilingual.View.fetch_key(%Plug.Conn{}, :locale)
       ...> end
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> socket = Phoenix.LiveView.put_private(%Phoenix.LiveView.Socket{}, :multilingual, view)
-      ...> Multilingual.View.fetch_key(socket, :route)
+      ...> Multilingual.View.fetch_key(socket, :path)
       "/about"
 
-      iex> view = %Multilingual.View{locale: "en", route: "/about"}
+      iex> view = %Multilingual.View{locale: "en", path: "/about"}
       ...> socket = Phoenix.LiveView.put_private(%Phoenix.LiveView.Socket{}, :multilingual, view)
       ...> Multilingual.View.fetch_key(socket, :bad_key)
       ** (FunctionClauseError) no function clause matching in Multilingual.View.fetch_key/2

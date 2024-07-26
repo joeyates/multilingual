@@ -18,14 +18,14 @@ defmodule Multilingual.HTMLTest do
         |> Plug.Conn.put_private(:phoenix_router, Router)
         |> Plug.Conn.put_private(:phoenix_router_url, "http://example.com")
         |> Plug.Conn.put_private(:multilingual, %Multilingual.View{
-          route: context.route,
+          path: context.path,
           locale: "en"
         })
 
       {:ok, conn: conn}
     end
 
-    @tag route: "/about"
+    @tag path: "/about"
     test "returns rel links based on the router", %{conn: conn} do
       result = get_rel_links(conn) |> iodata_to_string()
 
@@ -35,7 +35,7 @@ defmodule Multilingual.HTMLTest do
       assert result == expected
     end
 
-    @tag route: "/contacts/fred"
+    @tag path: "/contacts/fred"
     test "when the route has parameters, build links correctly", %{conn: conn} do
       result = get_rel_links(conn) |> iodata_to_string()
 

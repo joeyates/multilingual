@@ -38,7 +38,7 @@ defmodule Multilingual.Plugs.RedirectIncomingTest do
   defp optionally_add_multilingual_view(conn, %{multilingual_view: false}), do: conn
 
   defp optionally_add_multilingual_view(conn, _context) do
-    Plug.Conn.put_private(conn, :multilingual, %View{route: "/about", locale: "en"})
+    Plug.Conn.put_private(conn, :multilingual, %View{path: "/about", locale: "en"})
   end
 
   defp optionally_add_referer(conn, %{referer: false}), do: conn
