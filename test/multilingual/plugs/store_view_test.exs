@@ -33,12 +33,12 @@ defmodule Multilingual.Plugs.StoreViewTest do
       assert conn.private.multilingual.locale == "en"
     end
 
-    test "when the path has parameters, stores the correct route" do
+    test "when the path has parameters, stores the path" do
       conn = %Plug.Conn{request_path: "/contacts/fred", private: %{phoenix_router: Router}}
 
       conn = call(conn, %{default_locale: "cn"})
 
-      assert conn.private.multilingual.path == "/contacts/:name"
+      assert conn.private.multilingual.path == "/contacts/fred"
     end
 
     test "when the path has parameters, stores the correct locale" do

@@ -47,7 +47,7 @@ defmodule Multilingual.Hooks.StoreViewTest do
 
       hook = hd(socket.private.lifecycle.handle_params)
       {_, socket} = hook.function.([], "http://example.com/live/contacts/1", socket)
-      assert %Multilingual.View{path: "/live/contacts/:name"} = socket.private.multilingual
+      assert %Multilingual.View{path: "/live/contacts/1"} = socket.private.multilingual
     end
 
     test "when the path has parameters, the hook stores the locale", %{socket: socket} do
