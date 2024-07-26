@@ -117,16 +117,37 @@ get     MyAppWeb.PageController  :index  /about  /it/chi-siamo
 
 # Using Multilingual Routes
 
-With you routes set up, you get the following:
+With you routes set up, you can then make use of the information they give
+via the following modules and functions.
 
-* a [Plug](lib/multilingual/plugs/store_view.ex) to store view information for classic Phoenix views,
-* an [on_mount hook](lib/multilingual/live_view/hook.ex) to do the same to LiveViews,
-* a [Plug](lib/multilingual/plugs/redirect_incoming.ex) for incoming links,
-  which checks the 'accept-langauge' header
-  and redirects to the correct view for the user's needs,
-* a [rel links builder](lib/multilingual/html.ex) for the document head,
-  with the canonical URL and links to localized views,
+This works by first storing the current path and locale
+([the 'View'](lib/multilingual/view.ex))
+in the `conn` or ,for LiveView, the `socket` and then using that
+information to take further actions.
+
+## Plugs for the Router
+
+* The [StoreView Plug](lib/multilingual/plugs/store_view.ex) to store
+  [view](lib/multilingual/view.ex) information;
+* The [RedirectIncoming Plug](lib/multilingual/plugs/redirect_incoming.ex)
+  for incoming links, which checks the 'accept-langauge' header
+  and redirects to the correct view for the user's needs;
+* The [PutGettextLocale Plug](lib/multilingual/plugs/put_gettext_locale.ex)
+  which calls `Gettext.put_locale/1`.
+
+## LiveView Hooks
+
+* The [StoreView on_mount hook](lib/multilingual/live_view/hooks/store_view.ex)
+  to store [view](lib/multilingual/view.ex) information in the LiveView socket;
+* The [PutGettextLocale on_mount hook](lib/multilingual/live_view/hooks/put_gettext_locale.ex)
+  which calls `Gettext.put_locale/1`.
+
+## HTML Generation
+
+* [get_rel_links/1](lib/multilingual/html.ex) builds a set of SEO-friendly
+  rel links for the document head, indicating the canonical URL and links to
+  localized views,
 * [localized_path/3](lib/multilingual/routes.ex) takes any path and
   a locale and returns the equivalent path for that locale,
-* a [locales to paths mapping builder](lib/multilingual/routes.ex)
-  to aid the creation of language selectors.
+* [build_page_mapping/2](lib/multilingual/routes.ex) returns a mapping
+  of locales to paths to aid the creation of language selectors.
