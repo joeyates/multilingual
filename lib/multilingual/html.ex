@@ -26,11 +26,10 @@ if Code.ensure_loaded?(Phoenix.Component) do
         <link rel="alternate" hreflang="it" href="https://example.com/it/chi-siamo">
     """
     def get_rel_links(%Plug.Conn{} = conn) do
-      router = Phoenix.Controller.router_module(conn)
       path = View.fetch_key(conn, :route)
       locale = View.fetch_key(conn, :locale)
 
-      case Routes.build_page_mapping(router, path) do
+      case Routes.build_page_mapping(conn, path) do
         {:ok, mapping} ->
           rels = build_rels(conn, locale, mapping)
           rel_links(%{rels: rels})

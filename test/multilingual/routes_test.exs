@@ -5,10 +5,21 @@ defmodule Multilingual.RoutesTest do
   import Multilingual.Routes
   alias Multilingual.Test.Project.Router
 
+  setup do
+    conn = %Plug.Conn{private: %{phoenix_router: Router}}
+
+    {:ok, conn: conn}
+  end
+
   describe "build_page_mapping/2" do
     test "returns a mapping of locales to paths for the current page" do
       assert build_page_mapping(Router, "/about") ==
                {:ok, %{"en" => "/about", "it" => "/it/chi-siamo"}}
+    end
+
+    test "when the route has parameters, builds paths correctly" do
+      assert build_page_mapping(Router, "/contacts/fred") ==
+               {:ok, %{"en" => "/contacts/fred", "it" => "/it/contatti/fred"}}
     end
 
     test "returns an error tuple when the path doesn't exist" do
@@ -17,6 +28,11 @@ defmodule Multilingual.RoutesTest do
 
     test "returns an error tuple when the path is not localized" do
       assert build_page_mapping(Router, "/monolingual") == {:error, :not_localized}
+    end
+
+    test "accepts a Plug.Conn", %{conn: conn} do
+      assert build_page_mapping(conn, "/about") ==
+               {:ok, %{"en" => "/about", "it" => "/it/chi-siamo"}}
     end
   end
 

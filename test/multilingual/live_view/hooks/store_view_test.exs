@@ -42,7 +42,8 @@ defmodule Multilingual.Hooks.StoreViewTest do
     end
 
     test "when the path has parameters, the hook stores the route", %{socket: socket} do
-      {_, socket} = on_mount([default_locale: "en"], nil, "http://example.com/live/contacts/1", socket)
+      {_, socket} =
+        on_mount([default_locale: "en"], nil, "http://example.com/live/contacts/1", socket)
 
       hook = hd(socket.private.lifecycle.handle_params)
       {_, socket} = hook.function.([], "http://example.com/live/contacts/1", socket)
@@ -50,7 +51,8 @@ defmodule Multilingual.Hooks.StoreViewTest do
     end
 
     test "when the path has parameters, the hook stores the locale", %{socket: socket} do
-      {_, socket} = on_mount([default_locale: "en"], nil, "http://example.com/live/contacts/1", socket)
+      {_, socket} =
+        on_mount([default_locale: "en"], nil, "http://example.com/live/contacts/1", socket)
 
       hook = hd(socket.private.lifecycle.handle_params)
       {_, socket} = hook.function.([], "http://example.com/live/contacts/1", socket)
