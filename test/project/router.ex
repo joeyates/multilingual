@@ -4,12 +4,10 @@ defmodule Multilingual.Test.Project.Router do
   import Multilingual.Routes, only: [metadata: 1]
 
   scope "/", Multilingual.Test.Project do
-    get("/about", PageController, :about, metadata("en"))
+    # A simple route for a Phoenix view
+    get "/about", PageController, :about, metadata("en")
+    get "/it/chi-siamo", PageController, :about, metadata("it")
 
-    get("/monolingual", PageController, :monolingual)
-  end
-
-  scope "/it", Multilingual.Test.Project do
-    get("/chi-siamo", PageController, :about, metadata("it"))
+    get "/monolingual", PageController, :monolingual
   end
 end
