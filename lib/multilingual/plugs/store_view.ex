@@ -32,6 +32,6 @@ defmodule Multilingual.Plugs.StoreView do
     path = conn.request_path
     router = Phoenix.Controller.router_module(conn)
     locale = Routes.path_locale(router, path) || opts.default_locale
-    put_private(conn, :multilingual, %View{path: path, locale: locale})
+    put_private(conn, :multilingual, %View{route: path, locale: locale})
   end
 end

@@ -18,7 +18,7 @@ defmodule Multilingual.Routes do
 
       <% locales = ["en", "it"] %>
       <% locale = Multilingual.View.fetch_key(@conn, :locale) %>
-      <% path = Multilingual.View.fetch_key(@conn, :path) %>
+      <% path = Multilingual.View.fetch_key(@conn, :route) %>
       <% {:ok, mapping} = Multilingual.Routes.build_page_mapping(@conn, path) %>
       <nav>
         <ul>

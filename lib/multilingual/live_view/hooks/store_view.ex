@@ -27,7 +27,7 @@ if Code.ensure_loaded?(Phoenix.LiveView) do
         |> attach_hook(:multilingual_store_view, :handle_params, fn _params, uri, socket ->
           uri = URI.parse(uri)
           locale = Routes.path_locale(socket.router, uri.path) || default_locale
-          view = %View{path: uri.path, locale: locale}
+          view = %View{route: uri.path, locale: locale}
           socket = put_private(socket, :multilingual, view)
           {:cont, socket}
         end)
