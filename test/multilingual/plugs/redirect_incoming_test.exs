@@ -38,7 +38,7 @@ defmodule Multilingual.Plugs.RedirectIncomingTest do
   defp optionally_add_multilingual_view(conn, %{multilingual_view: false}), do: conn
 
   defp optionally_add_multilingual_view(conn, _context) do
-    Plug.Conn.put_private(conn, :multilingual, %View{path: "/about", locale: "en"})
+    Plug.Conn.put_private(conn, :multilingual, %View{route: "/about", locale: "en"})
   end
 
   defp optionally_add_referer(conn, %{referer: false}), do: conn
@@ -136,12 +136,12 @@ defmodule Multilingual.Plugs.RedirectIncomingTest do
     end
 
     @tag request_path: "/monolingual"
-    test "when there is no localized path, it does nothing", %{conn: conn, opts: opts} do
+    test "when there is no localized route, it does nothing", %{conn: conn, opts: opts} do
       assert %Plug.Conn{status: nil} = call(conn, opts)
     end
 
     @tag request_path: "/it/chi-siamo"
-    test "when the localized path is the same as the request path, it does nothing", %{
+    test "when the localized route is the same as the requested route, it does nothing", %{
       conn: conn,
       opts: opts
     } do

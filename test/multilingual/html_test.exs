@@ -11,7 +11,7 @@ defmodule Multilingual.HTMLTest do
         |> Map.put(:router, Router)
         |> Plug.Conn.put_private(:phoenix_router, Router)
         |> Plug.Conn.put_private(:phoenix_router_url, "http://example.com")
-        |> Plug.Conn.put_private(:multilingual, %Multilingual.View{path: "/about", locale: "en"})
+        |> Plug.Conn.put_private(:multilingual, %Multilingual.View{route: "/about", locale: "en"})
 
       result =
         get_rel_links(conn)
