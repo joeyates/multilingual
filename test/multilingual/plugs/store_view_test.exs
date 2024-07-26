@@ -33,8 +33,24 @@ defmodule Multilingual.Plugs.StoreViewTest do
       assert conn.private.multilingual.locale == "en"
     end
 
+    test "when the path has parameters, stores the correct route" do
+      conn = %Plug.Conn{request_path: "/contacts/fred", private: %{phoenix_router: Router}}
+
+      conn = call(conn, %{default_locale: "cn"})
+
+      assert conn.private.multilingual.route == "/contacts/:name"
+    end
+
+    test "when the path has parameters, stores the correct locale" do
+      conn = %Plug.Conn{request_path: "/contacts/fred", private: %{phoenix_router: Router}}
+
+      conn = call(conn, %{default_locale: "cn"})
+
+      assert conn.private.multilingual.locale == "en"
+    end
+
     test "uses the default locale when the route does not have a locale" do
-      conn = %Plug.Conn{request_path: "/some-page", private: %{phoenix_router: Router}}
+      conn = %Plug.Conn{request_path: "/monolingual", private: %{phoenix_router: Router}}
 
       conn = call(conn, %{default_locale: "cn"})
 
